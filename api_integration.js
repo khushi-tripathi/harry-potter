@@ -8,17 +8,35 @@ async function getApiIntegration(url) {
   return result;
 }
 
-async function fetchHouseData(data) {
+function fetchHouseData(data) {
   const houses = data.map((item, idx) => {
     return item?.house;
   });
   return houses;
 }
-async function fetchDataByName(name, data) {
+function fetchListOfBooks(data, name) {
+  console.log("Khushi Tripathi Data - ", data);
+  let start = `We have ${data?.length} parts of Harry Potter. We will explore more below - `;
+  return [name, start, ...data];
+}
+
+function fetchDataByName(name, data) {
   let result = {};
   switch (name) {
     case "house":
       result = fetchHouseData(data);
+      break;
+    case "book":
+      result = fetchListOfBooks(data, name);
+      break;
+    case "professor":
+      result = fetchListOfBooks(data);
+      break;
+    case "character":
+      result = fetchListOfBooks(data);
+      break;
+    case "spell":
+      result = fetchListOfBooks(data);
       break;
 
     default:
@@ -50,7 +68,7 @@ async function callApi(name) {
       break;
   }
   const data = await getApiIntegration(url);
-  const result = await fetchDataByName(name, data);
+  const result = fetchDataByName(name, data);
   return result;
 }
 function allStudentDetails() {

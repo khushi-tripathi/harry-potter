@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   background-color: plum;
+  font-family: cursive;
 }
 
 .main-section {
@@ -18,5 +19,32 @@
     justify-content: center;
     border-radius: 7px;
     cursor: pointer;
+    font-family: cursive;
+  }
+}
+
+.detail {
+  align-items: center;
+  padding: 1rem;
+  height: 345px;
+  display: flex;
+  width: 55%;
+  background-color: white;
+  flex-direction: column;
+  margin: 1rem;
+  font-size: small;
+  overflow-y: auto;
+  font-weight: bold;
+  div {
+    padding: 1rem;
+
+    .book-title {
+      font-style: italic;
+    }
+
+    .book-last {
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgb(158, 53, 176);
+    }
   }
 }
