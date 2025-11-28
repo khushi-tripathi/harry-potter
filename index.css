@@ -35,14 +35,42 @@
   font-size: small;
   overflow-y: auto;
   font-weight: bold;
+
+  .detail-house {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+    gap: 1rem; /* space between items (optional) */
+    align-items: center;
+    justify-content: center;
+  }
+  .detail-house > div:nth-child(2n)::after {
+    content: "";
+    display: block;
+    grid-column: 1 / -1; /* line spans full width */
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+  }
+  .detail-house > hr {
+    width: 200%;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .detail-house > * {
+    margin: 0;
+  }
   div {
     padding: 1rem;
-
     .book-title {
       font-style: italic;
     }
 
-    .book-last {
+    .house-title-label,
+    .house-title {
+      display: inline;
+    }
+
+    .div-last {
       padding-bottom: 1rem;
       border-bottom: 2px solid rgb(158, 53, 176);
     }

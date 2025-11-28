@@ -8,11 +8,10 @@ async function getApiIntegration(url) {
   return result;
 }
 
-function fetchHouseData(data) {
-  const houses = data.map((item, idx) => {
-    return item?.house;
-  });
-  return houses;
+function fetchHouseData(data, name) {
+  console.log(" Data - ", data);
+  const start = `We have ${data?.length} houses in Harry Potter Series...`;
+  return [name, start, ...data];
 }
 function fetchListOfBooks(data, name) {
   console.log("Khushi Tripathi Data - ", data);
@@ -24,7 +23,7 @@ function fetchDataByName(name, data) {
   let result = {};
   switch (name) {
     case "house":
-      result = fetchHouseData(data);
+      result = fetchHouseData(data, name);
       break;
     case "book":
       result = fetchListOfBooks(data, name);

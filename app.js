@@ -22,9 +22,60 @@ const alignBookDiv = (div, data) => {
   div.append(description);
 
   const pages = document.createElement("p");
-  pages.className = "book-last";
+  pages.className = "div-last";
   pages.textContent = `We have ${data?.pages} number of pages in this part`;
   div.appendChild(pages);
+};
+
+const alignHousesDiv = (div, data) => {
+  //   data = {
+  //     "house": "Slytherin",
+  //     "emoji": "🐍",
+  //     "founder": "Salazar Slytherin",
+  //     "colors": [
+  //         "green",
+  //         "silver"
+  //     ],
+  //     "animal": "Snake",
+  //     "index": 3
+  // }
+
+  const title = document.createElement("h1");
+  title.className = "house-title-label";
+  title.textContent = "House - ";
+  div.appendChild(title);
+
+  const houseTitle = document.createElement("h2");
+  houseTitle.className = "house-title";
+  houseTitle.textContent = data?.house;
+  div.appendChild(houseTitle);
+
+  const symbolTitle = document.createElement("h3");
+  symbolTitle.textContent = "House Symbol: ";
+  div.appendChild(symbolTitle);
+
+  const symbol = document.createElement("h2");
+  symbol.textContent = data?.emoji;
+  div.appendChild(symbol);
+
+  const FounderLabel = document.createElement("h3");
+  FounderLabel.textContent = "Founder: ";
+  div.append(FounderLabel);
+
+  const founder = document.createElement("p");
+  founder.textContent = data?.founder;
+  div.append(founder);
+
+  const denotedAnimal = document.createElement("h3");
+  denotedAnimal.textContent = "Denoted Animal: ";
+  div.append(denotedAnimal);
+
+  const animal = document.createElement("p");
+  animal.textContent = data?.animal;
+  div.append(animal);
+
+  const hr = document.createElement("hr");
+  div.append(hr);
 };
 
 const iterateData = (type, div, data) => {
@@ -32,6 +83,11 @@ const iterateData = (type, div, data) => {
     case "book":
       console.log("Bookss");
       alignBookDiv(div, data);
+      break;
+
+    case "house":
+      console.log("Housess");
+      alignHousesDiv(div, data);
       break;
 
     default:
@@ -49,15 +105,29 @@ sub_section.forEach((section) => {
     // const ele = document.querySelector("#" + event.target.value + "s");
     const ele = document.querySelector(".detail");
     ele.innerHTML = null;
-    data?.map((item) => {
-      const div = document.createElement("div");
-      if (typeof item === "object") {
-        console.log("itemmm ", item);
-        iterateData(data[0], div, item);
-      } else {
-        div.textContent = item;
+    data?.map((item, idx) => {
+      if (idx !== 0) {
+        const div = document.createElement("div");
+
+        if (typeof item === "object") {
+          if (data[0] === "house") {
+            div.className = "detail-house";
+          }
+          console.log("itemmm ", item);
+          iterateData(data[0], div, item);
+        } else {
+          div.textContent = item;
+        }
+        ele?.append(div);
+      } else if (typeof item === "string") {
+        const h1 = document.createElement("h1");
+        const content = (item?.charAt(0)?.toUpperCase() + item?.slice(1) + "s")
+          .length
+          ? item?.charAt(0)?.toUpperCase() + item?.slice(1) + "s"
+          : "";
+        h1.textContent = content;
+        ele.append(h1);
       }
-      ele?.append(div);
     });
   });
 });
